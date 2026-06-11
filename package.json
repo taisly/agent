@@ -1,13 +1,13 @@
 {
   "name": "@taisly/agent",
-  "version": "0.1.0",
-  "description": "JSON-first SDK and CLI for AI agents that publish short-form videos through Taisly.",
+  "version": "0.1.1",
+  "description": "AI agent social media posting SDK and CLI for publishing videos to TikTok, Instagram Reels, YouTube Shorts, X, and Facebook through Taisly.",
   "type": "module",
   "main": "src/index.js",
-  "homepage": "https://taisly.com/ai-agent-kit",
+  "homepage": "https://taisly.com/en/ai-agent-kit",
   "repository": {
     "type": "git",
-    "url": "https://github.com/taisly/agent.git"
+    "url": "git+https://github.com/taisly/agent.git"
   },
   "bugs": {
     "url": "https://github.com/taisly/agent/issues"
@@ -19,6 +19,8 @@
     "taisly": "./src/cli.js"
   },
   "files": [
+    "assets",
+    "docs",
     "LICENSE",
     "README.md",
     "SKILL.md",
@@ -30,16 +32,27 @@
   },
   "keywords": [
     "taisly",
+    "taisly-agent-kit",
+    "ai-agent-social-media-posting",
     "ai-agents",
+    "agentic-workflows",
     "video-publishing",
+    "video-publishing-api",
     "social-media",
+    "social-media-automation",
+    "tiktok-api",
     "tiktok",
+    "instagram-automation",
     "instagram-reels",
+    "youtube-shorts-publishing",
     "youtube-shorts",
+    "x",
+    "facebook",
     "automation",
     "codex",
     "claude-code",
-    "cursor"
+    "cursor",
+    "openclaw"
   ],
   "license": "MIT",
   "engines": {
