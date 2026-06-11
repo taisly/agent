@@ -1,0 +1,6 @@
+{
+  "video": "./launch.mp4",
+  "platforms": ["platform_id_1", "platform_id_2"],
+  "description": "Launch day. Short demo, big update.",
+  "scheduled": "2026-06-14T09:00:00+07:00"
+}

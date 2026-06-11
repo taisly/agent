@@ -1,0 +1,48 @@
+{
+  "name": "@taisly/agent",
+  "version": "0.1.0",
+  "description": "JSON-first SDK and CLI for AI agents that publish short-form videos through Taisly.",
+  "type": "module",
+  "main": "src/index.js",
+  "homepage": "https://taisly.com/ai-agent-kit",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/taisly/agent.git"
+  },
+  "bugs": {
+    "url": "https://github.com/taisly/agent/issues"
+  },
+  "exports": {
+    ".": "./src/index.js"
+  },
+  "bin": {
+    "taisly": "./src/cli.js"
+  },
+  "files": [
+    "LICENSE",
+    "README.md",
+    "SKILL.md",
+    "src",
+    "examples"
+  ],
+  "scripts": {
+    "check": "node --check src/index.js && node --check src/cli.js"
+  },
+  "keywords": [
+    "taisly",
+    "ai-agents",
+    "video-publishing",
+    "social-media",
+    "tiktok",
+    "instagram-reels",
+    "youtube-shorts",
+    "automation",
+    "codex",
+    "claude-code",
+    "cursor"
+  ],
+  "license": "MIT",
+  "engines": {
+    "node": ">=20"
+  }
+}
