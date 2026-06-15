@@ -1,7 +1,8 @@
 ---
-name: taisly
-description: Publish short-form videos to connected social platforms through Taisly using a JSON-first CLI and API.
+name: taisly-social-media-posting
+description: Publish short-form videos to TikTok, Instagram Reels, YouTube Shorts, X, and Facebook from AI agents through Taisly.
 metadata:
+  publicName: Taisly Social Media Posting Skill
   requirements:
     env:
       - TAISLY_API_KEY
@@ -9,7 +10,7 @@ metadata:
       - taisly
 ---
 
-# Taisly Agent Skill
+# Taisly Social Media Posting Skill
 
 Use this skill when a user asks an AI agent to publish, schedule, or repost short-form video content through Taisly.
 
@@ -17,6 +18,8 @@ Use this skill when a user asks an AI agent to publish, schedule, or repost shor
 
 - Always discover platforms before posting.
 - Ask for explicit confirmation before publishing to live social accounts unless the user already gave exact destination accounts, video file, caption, and schedule.
+- If MCP tools are available, prefer them over shell commands; otherwise use the JSON-first CLI.
+- For MCP publishing, call `taisly_posts_create` only with `confirmed: true` after explicit user approval.
 - Never invent platform IDs.
 - Never expose or print `TAISLY_API_KEY`.
 - Prefer scheduled posts when the user gives a future time.
@@ -43,9 +46,24 @@ taisly posts:create --json ./campaign.json
 taisly posts:list --page 1
 taisly posts:status --id <historyId>
 taisly reposts:create --from <platform_id> --to <platform_id_1,platform_id_2>
+taisly mcp
 ```
 
 All commands return JSON.
+
+## MCP Tools
+
+When the MCP server is connected, use these tools instead of shell commands:
+
+- `taisly_auth_status`
+- `taisly_platforms_list`
+- `taisly_platform_schema`
+- `taisly_posts_validate`
+- `taisly_posts_create`
+- `taisly_posts_status`
+- `taisly_posts_list`
+- `taisly_reposts_list`
+- `taisly_reposts_create`
 
 ## Posting Workflow
 
@@ -57,6 +75,8 @@ All commands return JSON.
 6. Confirm destination accounts and caption with the user.
 7. Run `taisly posts:create`.
 8. Report the returned `historyId`, scheduled date, and per-platform initial statuses.
+
+For MCP, follow the same sequence with `taisly_auth_status`, `taisly_platforms_list`, `taisly_platform_schema`, `taisly_posts_validate`, `taisly_posts_create`, and `taisly_posts_status`.
 
 ## Error Handling
 

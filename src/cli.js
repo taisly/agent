@@ -1,24 +1,34 @@
 #!/usr/bin/env node
 import { Taisly, TaislyError, readJsonFile } from "./index.js";
+import { startMcpServer } from "./mcp.js";
 
 const client = new Taisly();
 const [command, ...rawArgs] = process.argv.slice(2);
 const args = parseArgs(rawArgs);
 
-try {
-  const result = await run(command, await loadJsonInput(args));
-  printJson(result);
-} catch (error) {
-  if (error instanceof TaislyError) {
-    printJson(error.toJSON());
+if (command === "mcp") {
+  try {
+    await startMcpServer({ client });
+  } catch (error) {
+    process.stderr.write(`Taisly MCP server failed: ${error?.message || error}\n`);
     process.exitCode = 1;
-  } else {
-    printJson({
-      success: false,
-      code: "UNEXPECTED_ERROR",
-      message: error?.message || "Unexpected error",
-    });
-    process.exitCode = 1;
+  }
+} else {
+  try {
+    const result = await run(command, await loadJsonInput(args));
+    printJson(result);
+  } catch (error) {
+    if (error instanceof TaislyError) {
+      printJson(error.toJSON());
+      process.exitCode = 1;
+    } else {
+      printJson({
+        success: false,
+        code: "UNEXPECTED_ERROR",
+        message: error?.message || "Unexpected error",
+      });
+      process.exitCode = 1;
+    }
   }
 }
 
@@ -99,10 +109,11 @@ function help() {
       "posts:status --id <historyId>",
       "reposts:list",
       "reposts:create --from <platformId> --to <platformId,platformId>",
+      "mcp",
     ],
     env: ["TAISLY_API_KEY", "TAISLY_API_URL"],
     jsonInput:
-      "Pass --json file.json or --input file.json to load command options from a JSON file.",
+      "Pass --json file.json or --input file.json to load command options from a JSON file. Run taisly mcp to start the stdio MCP server.",
   };
 }
 

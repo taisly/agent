@@ -2,7 +2,7 @@
 
 # Taisly Agent Kit
 
-AI agent social media posting for short-form video. Taisly Agent Kit is a JSON-first SDK and CLI that lets AI agents, developer tools, and automation workflows publish videos to TikTok, Instagram Reels, YouTube Shorts, X, Facebook, and other connected social platforms through Taisly.
+AI agent social media posting for short-form video. Taisly Agent Kit is a JSON-first SDK, CLI, Agent Skill, and MCP server that lets AI agents, developer tools, and automation workflows publish videos to TikTok, Instagram Reels, YouTube Shorts, X, Facebook, and other connected social platforms through Taisly.
 
 Use it when your agent can create content, write captions, or prepare a campaign, but still needs a reliable video publishing API to put that content online.
 
@@ -36,6 +36,18 @@ Read this guide in:
 
 Taisly handles the connected accounts and posting execution. Your agent handles planning, caption writing, campaign logic, or workflow orchestration.
 
+## Agent Skill
+
+This package includes the **Taisly Social Media Posting Skill** in `SKILL.md`. Use it with Claude Code, Codex, Cursor, OpenClaw, and custom agents when you want the agent to understand the safe posting workflow before it touches live social accounts.
+
+Recommended skill workflow:
+
+```txt
+auth -> platforms -> validate -> confirm -> create -> status
+```
+
+The skill tells agents to discover connected accounts, validate the post, ask for explicit user confirmation, create the post, and save the returned `historyId` for status checks.
+
 ## Install
 
 ```bash
@@ -46,6 +58,12 @@ Or run it without a global install:
 
 ```bash
 npx @taisly/agent help
+```
+
+Start the stdio MCP server:
+
+```bash
+npx @taisly/agent mcp
 ```
 
 For local development inside this repository:
@@ -110,6 +128,38 @@ taisly posts:status --id <historyId>
 
 Every command prints JSON so agents can parse results without scraping terminal text.
 
+## MCP server
+
+Taisly Agent Kit includes a stdio MCP server in the same package. MCP clients can connect it with:
+
+```json
+{
+  "mcpServers": {
+    "taisly": {
+      "command": "npx",
+      "args": ["@taisly/agent", "mcp"],
+      "env": {
+        "TAISLY_API_KEY": "taisly_..."
+      }
+    }
+  }
+}
+```
+
+Available MCP tools:
+
+- `taisly_auth_status`
+- `taisly_platforms_list`
+- `taisly_platform_schema`
+- `taisly_posts_validate`
+- `taisly_posts_create`
+- `taisly_posts_status`
+- `taisly_posts_list`
+- `taisly_reposts_list`
+- `taisly_reposts_create`
+
+`taisly_posts_create` requires `confirmed: true`. Set it only after the user explicitly approves the video, destination accounts, caption, and schedule.
+
 ## JSON workflow for agents
 
 Agents can write a payload file and pass it to the CLI:
@@ -146,6 +196,7 @@ taisly posts:list --page 1
 taisly posts:status --id <historyId>
 taisly reposts:list
 taisly reposts:create --from <platform_id> --to <platform_id_1,platform_id_2>
+taisly mcp
 ```
 
 `integrations:*` commands are aliases for `platforms:*` commands. Taisly calls connected social accounts platforms in the app, while many public APIs call them integrations.
@@ -216,7 +267,8 @@ The `examples/` folder includes copy-paste workflows for common coding agents:
 - `posts:create` uses the existing multipart `/post` API.
 - `posts:status` reads recent history because a single-post status endpoint is not available yet.
 - `posts:validate` is local preflight; final validation still happens in Taisly.
-- Media upload reuse and MCP are planned next.
+- The MCP server currently uses stdio transport. Remote MCP transport is planned later.
+- Media upload reuse is planned later.
 
 ## Links
 
