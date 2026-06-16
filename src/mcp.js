@@ -9,7 +9,7 @@ const SUPPORTED_PROTOCOL_VERSIONS = new Set([
 ]);
 const SERVER_NAME = "taisly-agent-kit";
 const SERVER_TITLE = "Taisly Agent Kit";
-const SERVER_VERSION = "0.2.0";
+const SERVER_VERSION = "0.2.1";
 
 const JSON_OBJECT_SCHEMA = {
   type: "object",

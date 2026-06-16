@@ -2,11 +2,14 @@
 
 # Taisly Agent Kit
 
+[![Taisly MCP server](https://glama.ai/mcp/servers/taisly/agent/badges/card.svg)](https://glama.ai/mcp/servers/taisly/agent)
+[![Taisly MCP score](https://glama.ai/mcp/servers/taisly/agent/badges/score.svg)](https://glama.ai/mcp/servers/taisly/agent)
+
 AI agent social media posting for short-form video. Taisly Agent Kit is a JSON-first SDK, CLI, Agent Skill, and MCP server that lets AI agents, developer tools, and automation workflows publish videos to TikTok, Instagram Reels, YouTube Shorts, X, Facebook, and other connected social platforms through Taisly.
 
 Use it when your agent can create content, write captions, or prepare a campaign, but still needs a reliable video publishing API to put that content online.
 
-[Website](https://taisly.com/en) | [Agent Kit](https://taisly.com/en/ai-agent-kit) | [API Docs](https://docs.taisly.com/en/docs) | [npm](https://www.npmjs.com/package/@taisly/agent) | [GitHub](https://github.com/taisly/agent) | [Guide](https://taisly.com/en/blog/ai-agent-social-media-posting-api)
+[Website](https://taisly.com/en) | [Agent Kit](https://taisly.com/en/ai-agent-kit) | [API Docs](https://docs.taisly.com/en/docs) | [npm](https://www.npmjs.com/package/@taisly/agent) | [GitHub](https://github.com/taisly/agent) | [Glama](https://glama.ai/mcp/servers/taisly/agent) | [Guide](https://taisly.com/en/blog/ai-agent-social-media-posting-api)
 
 ## Languages
 
