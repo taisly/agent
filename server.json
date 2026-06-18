@@ -22,13 +22,6 @@
           "format": "string",
           "isRequired": true,
           "isSecret": true
-        },
-        {
-          "name": "TAISLY_API_URL",
-          "description": "Optional custom Taisly API URL. Defaults to https://app.taisly.com/api/private.",
-          "format": "string",
-          "isRequired": false,
-          "isSecret": false
         }
       ]
     }
