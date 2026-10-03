@@ -20,7 +20,7 @@
     "url": "https://github.com/taisly/agent",
     "source": "github"
   },
-  "version": "0.2.8",
+  "version": "0.2.9",
   "remotes": [
     {
       "type": "streamable-http",
@@ -31,7 +31,7 @@
     {
       "registryType": "npm",
       "identifier": "@taisly/agent",
-      "version": "0.2.8",
+      "version": "0.2.9",
       "transport": {
         "type": "stdio"
       },

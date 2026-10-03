@@ -188,7 +188,7 @@ const TOOLS = [
   {
     name: "taisly_posts_create",
     title: "Create Taisly Post",
-    description: "Publish or schedule a video post through Taisly after the user explicitly confirms the media, destinations, caption, and schedule.",
+    description: "Start publishing or schedule a video post after explicit user confirmation. success: true means Taisly accepted the request, not that every platform published it. For an immediate post, use the returned historyId with taisly_posts_status and report success only when the per-platform status is SUCCESS.",
     annotations: EXTERNAL_MUTATING_TOOL_ANNOTATIONS,
     inputSchema: {
       type: "object",
@@ -228,7 +228,7 @@ const TOOLS = [
   {
     name: "taisly_posts_status",
     title: "Get Taisly Post Status",
-    description: "Fetch recent-history status for a Taisly post by historyId.",
+    description: "Fetch per-platform status for a Taisly post by historyId. Inspect data.result[].status: PENDING is still processing, SUCCESS is published, and FAILED is not published.",
     annotations: READ_ONLY_TOOL_ANNOTATIONS,
     inputSchema: {
       type: "object",
