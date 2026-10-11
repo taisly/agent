@@ -1,3 +1,7 @@
+已经连接？请使用现有的 Taisly MCP 连接。OAuth 提供访问权限，无需额外的 API 密钥或安装 CLI。 [MCP 文档](https://docs.taisly.com/zh-CN/docs/mcp)
+
+自定义代码或本地视频请参阅独立的 SDK、CLI 和本地 MCP 指南。这些是可选的开发工具。
+
 ![Taisly Agent Kit](../../assets/taisly-agent-banner.jpg)
 
 # Taisly Agent Kit

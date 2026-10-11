@@ -40,7 +40,7 @@ Read this guide in:
 
 Taisly handles the connected accounts and posting execution. Your agent handles planning, caption writing, campaign logic, or workflow orchestration.
 
-## Free AI-first posting
+## Optional local workflows
 
 - Install the package for free.
 - Create or connect a Taisly account from your AI agent.
@@ -71,7 +71,22 @@ https://app.taisly.com/mcp
 
 Use the plugin when you want Codex to discover both the posting workflow instructions and the Taisly MCP tools from one package. The root `SKILL.md` is the single source of truth for the agent workflow.
 
-## Install
+## Connect an AI agent through remote MCP
+
+Remote MCP is the default AI-agent connection. If Taisly tools are already available, call `taisly_auth_status` and `taisly_platforms_list` directly. OAuth provides access; do not install this package or ask for an API key for that connection.
+
+```txt
+Help me connect Taisly to this agent using the setup guide. Check access and list my connected social accounts. Do not publish anything during setup.
+
+Full documentation: https://docs.taisly.com/docs/mcp
+```
+
+The remote server URL is `https://app.taisly.com/mcp`. Add it through your client's remote MCP and OAuth settings if needed. Human authorization or administrator approval may be required. On expiry, reconnect through OAuth rather than switching to the CLI.
+
+## Optional local package installation
+
+Use the following package instructions for explicit SDK, CLI or local-file workflows. They are not remote MCP setup requirements.
+
 
 ```bash
 npm install -g @taisly/agent
@@ -95,9 +110,9 @@ For local development inside this repository:
 node packages/agent/src/cli.js help
 ```
 
-## Authentication
+## Local package authentication
 
-The easiest flow is to let your AI agent open the browser login for you. Use any short agent slug, for example `claude-code`, `codex`, `cursor`, `windsurf`, `openclaw`, `hermes-agent`, `cline`, or `aider`.
+For the local package, browser setup can store a local credential without manually copying an API key. Use any short agent slug, for example `claude-code`, `codex`, `cursor`, `windsurf`, `openclaw`, `hermes-agent`, `cline`, or `aider`.
 
 ```txt
 Help me set up Taisly Agent Kit.

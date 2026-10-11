@@ -1,3 +1,7 @@
+متصل بالفعل؟ استخدم اتصال MCP الحالي. يمنح OAuth الوصول دون مفتاح API إضافي أو تثبيت CLI. [وثائق MCP](https://docs.taisly.com/docs/mcp)
+
+للكود المخصص أو الفيديوهات المحلية، استخدم دليل SDK وCLI وMCP المحلي المنفصل. هذه أدوات تطوير اختيارية.
+
 ![Taisly Agent Kit](../../assets/taisly-agent-banner.jpg)
 
 # Taisly Agent Kit

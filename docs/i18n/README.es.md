@@ -1,3 +1,7 @@
+¿Ya está conectado? Usa la conexión MCP existente. OAuth proporciona acceso sin otra clave API ni instalación de CLI. [Documentación MCP](https://docs.taisly.com/docs/mcp)
+
+Para código propio o vídeos locales, consulta la guía independiente de SDK, CLI y MCP local. Son herramientas opcionales para desarrolladores.
+
 ![Taisly Agent Kit](../../assets/taisly-agent-banner.jpg)
 
 # Taisly Agent Kit

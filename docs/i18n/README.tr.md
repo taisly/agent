@@ -1,3 +1,7 @@
+Zaten bağlı mı? Mevcut MCP bağlantısını kullanın. OAuth erişim sağlar; ek API anahtarı veya CLI kurulumu gerekmez. [MCP belgeleri](https://docs.taisly.com/docs/mcp)
+
+Özel kod veya yerel videolar için ayrı SDK, CLI ve yerel MCP kılavuzunu kullanın. Bunlar isteğe bağlı geliştirici araçlarıdır.
+
 ![Taisly Agent Kit](../../assets/taisly-agent-banner.jpg)
 
 # Taisly Agent Kit

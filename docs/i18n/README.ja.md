@@ -1,3 +1,7 @@
+接続済みですか？既存の MCP 接続を使ってください。OAuth によりアクセスでき、追加の API キーや CLI のインストールは不要です。 [MCP ドキュメント](https://docs.taisly.com/docs/mcp)
+
+独自のコードやローカル動画には、SDK、CLI、ローカル MCP の専用ガイドをご覧ください。これらは任意の開発ツールです。
+
 ![Taisly Agent Kit](../../assets/taisly-agent-banner.jpg)
 
 # Taisly Agent Kit
