@@ -1,7 +1,7 @@
 ---
 name: taisly-social-media-posting
 description: Connect AI agents to Taisly through MCP to publish and schedule videos, inspect history, and manage reposts.
-version: 0.2.9
+version: 0.2.10
 metadata:
   publicName: Taisly Social Media Posting Skill
 ---
