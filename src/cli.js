@@ -75,6 +75,7 @@ async function run(commandName, options) {
         platforms: options.platforms || options.integrations,
         description: options.description || options.caption,
         scheduled: options.scheduled || options.at,
+        settings: options.settings,
       });
 
     case "posts:create":
@@ -83,6 +84,7 @@ async function run(commandName, options) {
         platforms: options.platforms || options.integrations,
         description: options.description || options.caption,
         scheduled: options.scheduled || options.at,
+        settings: options.settings,
         previewTime: options.previewTime || 0,
       });
 
@@ -127,12 +129,14 @@ function help() {
       "platforms:list",
       "integrations:list",
       "platforms:schema --platform TikTok",
+      "platforms:schema --platform YouTube",
       "platforms:connect:start --platform instagram",
       "platforms:connect:check --platform instagram",
       "Supported connect slugs: instagram, tiktok, youtube, x, facebook",
       "posts:validate --video ./launch.mp4 --platforms <id,id> --description 'Launch day'",
       "posts:create --video ./launch.mp4 --platforms <id,id> --description 'Launch day' --scheduled 2026-06-14T09:00:00+07:00",
       "posts:create --json campaign.json",
+      'posts:create --video ./launch.mp4 --platforms <tiktok_id,youtube_id> --description "Launch day" --settings \'{"TikTok":{"status":"PUBLIC_TO_EVERYONE"},"YouTube":{"status":"unlisted"}}\'',
       "posts:list --page 1",
       "posts:status --id <historyId>",
       "reposts:list",

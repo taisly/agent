@@ -190,6 +190,64 @@ Check the returned post:
 taisly posts:status --id <historyId>
 ```
 
+## Posting settings
+
+Discover supported options and accepted values for each destination platform:
+
+```bash
+taisly platforms:schema --platform TikTok
+taisly platforms:schema --platform YouTube
+```
+
+Group options by platform name in `settings`. For example:
+
+```bash
+taisly posts:create \
+  --video ./launch.mp4 \
+  --platforms your_tiktok_platform_id,your_youtube_platform_id \
+  --description "Product walkthrough" \
+  --settings '{"TikTok":{"status":"PUBLIC_TO_EVERYONE"},"YouTube":{"title":"Product walkthrough","status":"unlisted"}}'
+```
+
+With `--json`, put the same object in the input file's `settings` property. SDK
+calls accept `settings` as an object. For remote or local MCP, discover options
+with `taisly_platform_schema` and pass `settings` to both `taisly_posts_validate`
+and `taisly_posts_create`. The HTTP API accepts a JSON-encoded `settings` form field.
+
+| Platform | Settings | Meaning |
+| --- | --- | --- |
+| TikTok | `status` | `PUBLIC_TO_EVERYONE`, `MUTUAL_FOLLOW_FRIENDS`, `FOLLOWER_OF_CREATOR`, or `SELF_ONLY`, subject to the account's available visibility options. |
+| TikTok | `comment_disabled`, `duet_disabled`, `stitch_disabled` | Boolean switches; `true` disables the interaction. |
+| TikTok | `brand_content_toggle` | Boolean; discloses a paid partnership promoting a third-party business. Cannot be combined with `SELF_ONLY`. |
+| TikTok | `brand_organic_toggle` | Boolean; discloses promotion of the creator's own business. Both brand switches may be enabled together. |
+| TikTok | `is_aigc` | Boolean; `true` enables the native AI-generated content label. Omit to keep existing behavior, or explicitly pass `false`. |
+| YouTube | `title` | Optional video title, up to 100 characters. Omit to use the post caption. |
+| YouTube | `status` | `public`, `private`, or `unlisted`. |
+
+For example, a public TikTok post promoting your own business and an unlisted
+YouTube post with its own title can share one request:
+
+```json
+{
+  "settings": {
+    "TikTok": {
+      "status": "PUBLIC_TO_EVERYONE",
+      "brand_organic_toggle": true,
+      "comment_disabled": false
+    },
+    "YouTube": {
+      "title": "Product walkthrough",
+      "status": "unlisted"
+    }
+  }
+}
+```
+
+These settings work with `--settings`, `--json`, SDK calls, and both MCP servers,
+for immediate and scheduled posts. They apply to all selected accounts on the
+corresponding platform. Omitted fields keep the usual posting behavior. These
+options apply only to the requested post. TikTok account restrictions still apply.
+
 Every command prints JSON so agents can parse results without scraping terminal text.
 
 ## MCP server

@@ -1,6 +1,7 @@
 import { readFile, stat } from "node:fs/promises";
 import path from "node:path";
 import { readStoredCredential } from "./config.js";
+import { getPostSettingsSchema, parsePostSettings } from "./postSettings.js";
 
 export const DEFAULT_API_URL = "https://app.taisly.com/api/private";
 const DEFAULT_HISTORY_PAGE = 1;
@@ -115,7 +116,13 @@ export class Taisly {
   };
 
   posts = {
-    validate: async ({ video, platforms, description, scheduled }) => {
+    validate: async ({ video, platforms, description, scheduled, settings }) => {
+      let postSettings;
+      try {
+        postSettings = parsePostSettings(settings);
+      } catch (error) {
+        throw new TaislyError("INVALID_POST_SETTINGS", error.message);
+      }
       if (!video) throw new TaislyError("VIDEO_REQUIRED", "Pass --video.");
       if (!description) {
         throw new TaislyError("DESCRIPTION_REQUIRED", "Pass --description.");
@@ -150,16 +157,18 @@ export class Taisly {
           platforms: platformIds,
           descriptionLength: description.length,
           scheduled: scheduled ? normalizeScheduled(scheduled) : null,
+          settings: postSettings,
         },
       };
     },
 
-    create: async ({ video, platforms, description, scheduled, previewTime = 0 }) => {
+    create: async ({ video, platforms, description, scheduled, settings, previewTime = 0 }) => {
       const validation = await this.posts.validate({
         video,
         platforms,
         description,
         scheduled,
+        settings,
       });
       const platformIds = validation.data.platforms;
 
@@ -171,6 +180,7 @@ export class Taisly {
       form.append("platforms", JSON.stringify(platformIds));
       form.append("description", description);
       form.append("previewTime", String(previewTime));
+      form.append("settings", JSON.stringify(validation.data.settings));
 
       if (scheduled) {
         form.append("scheduled", normalizeScheduled(scheduled));
@@ -300,6 +310,7 @@ export function getPlatformSchema(platform) {
     return {
       ...base,
       platform: "YouTube",
+      settings: getPostSettingsSchema("YouTube"),
       notes: ["Use vertical videos for Shorts-style distribution."],
     };
   }
@@ -308,6 +319,7 @@ export function getPlatformSchema(platform) {
     return {
       ...base,
       platform: "TikTok",
+      settings: getPostSettingsSchema("TikTok"),
       notes: ["Keep captions concise and validate commercial/music rights."],
     };
   }

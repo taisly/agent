@@ -1,5 +1,6 @@
 import { createInterface } from "node:readline";
 import { Taisly, TaislyError } from "./index.js";
+import { POST_SETTINGS_SCHEMA } from "./postSettings.js";
 import { checkinAgent, setupAgent } from "./setup.js";
 
 const PROTOCOL_VERSION = "2025-06-18";
@@ -101,7 +102,7 @@ const TOOLS = [
   {
     name: "taisly_platform_schema",
     title: "Get Platform Posting Schema",
-    description: "Get local posting constraints for a destination platform before validating or creating a post.",
+    description: "Get posting constraints and supported settings for a destination platform.",
     annotations: READ_ONLY_TOOL_ANNOTATIONS,
     inputSchema: {
       type: "object",
@@ -176,6 +177,7 @@ const TOOLS = [
           type: "string",
           description: "Post caption or description.",
         },
+        settings: POST_SETTINGS_SCHEMA,
         scheduled: {
           type: "string",
           description: "Optional ISO datetime or Unix timestamp in milliseconds.",
@@ -208,6 +210,7 @@ const TOOLS = [
           type: "string",
           description: "Post caption or description.",
         },
+        settings: POST_SETTINGS_SCHEMA,
         scheduled: {
           type: "string",
           description: "Optional ISO datetime or Unix timestamp in milliseconds.",
@@ -322,6 +325,7 @@ const TOOL_HANDLERS = {
       platforms: args.platforms,
       description: args.description,
       scheduled: args.scheduled,
+      settings: args.settings,
     }),
   taisly_posts_create: (client, args) => {
     if (args.confirmed !== true) {
@@ -337,6 +341,7 @@ const TOOL_HANDLERS = {
       platforms: args.platforms,
       description: args.description,
       scheduled: args.scheduled,
+      settings: args.settings,
       previewTime: args.previewTime || 0,
     });
   },
@@ -459,7 +464,7 @@ class TaislyMcpServer {
         version: SERVER_VERSION,
       },
       instructions:
-        "If Taisly is not connected yet, use taisly_agent_setup_start, send the user the returned loginUrl, wait for browser approval, then use taisly_agent_checkin. If a requested social account is missing, use taisly_platform_connect_start, send the user the returned connectUrl, wait for browser approval, then use taisly_platform_connect_check. After setup, discover connected social accounts, validate posts, ask for explicit user confirmation, then create and monitor posts.",
+        "If Taisly is not connected yet, use taisly_agent_setup_start, send the user the returned loginUrl, wait for browser approval, then use taisly_agent_checkin. If a requested social account is missing, use taisly_platform_connect_start, send the user the returned connectUrl, wait for browser approval, then use taisly_platform_connect_check. After setup, discover connected social accounts, validate posts, ask for explicit user confirmation, then create and monitor posts. Read taisly_platform_schema for each destination platform. Pass requested options under settings keyed by platform name, using the same settings for post validation and creation. Include requested settings in the posting confirmation.",
     };
   }
 
